@@ -1,0 +1,12 @@
+﻿My follow through of Wes Bos 30 day javascript challenge
+
+![](https://javascript30.com/images/JS3-social-share.png)
+
+# JavaScript30
+
+Starter Files + Completed solutions for the JavaScript 30 Day Challenge.
+
+Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
+
+## Community #JavaScript30 Content
+
