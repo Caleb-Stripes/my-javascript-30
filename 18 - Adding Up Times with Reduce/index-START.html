@@ -182,6 +182,32 @@
     </li>
   </ul>
 <script>
+
+const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+
+//so we have taken a node list of all occurances of data-time and then pulled an array from it.
+// next we establish a constant based on each occurance of data-time's node trait "time", we use each of these values to create a timeCode splitting the minutes from the seconds, converting the minutes into seconds and taking the sum of that value to represent the lenght in seconds of each video.
+// by using the reduce function on the timeCode map we can then pull an integer or any other value from that array as a primative.
+
+const seconds = timeNodes
+.map(node => node.dataset.time)
+.map(timeCode => {
+  const [mins, secs] = timeCode.split(':')
+  .map(parseFloat);
+  return (mins * 60) + secs;
+}).reduce((total, vidSeconds) => total + vidSeconds)
+
+// once se have the total seconds for all the videos combined we pull the total number of hours "3600 seconds in an hour" and using mod (%) we find the number of seconds left over.
+// with hours found we use the seconds left over to find minutes the same way "60 sec in a minute" and then determine the seconds left over.
+let secondsLeft = seconds;
+const hours = Math.floor(secondsLeft/3600);
+secondsLeft = secondsLeft % 3600;
+
+const mins = Math.floor(secondsLeft/60);
+secondsLeft = secondsLeft % 60;
+
+console.log(hours, mins, secondsLeft);
+
 </script>
 </body>
 </html>
