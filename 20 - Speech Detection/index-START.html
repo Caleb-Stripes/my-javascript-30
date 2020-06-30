@@ -10,8 +10,36 @@
   </div>
 
 <script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition = window.webkitSpeechRecognition;
 
+//webkitSpeechRecognition is for Chrome, SpeachRecognition is firefox
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+
+let p = document.createElement('p');
+const words = document.querySelector('.words');
+words.appendChild(p);
+
+recognition.addEventListener('result', e => {
+  const transcript = Array.from(e.results)
+  .map(result => result[0])
+  .map(result => result.transcript)
+  .join('')
+
+  p.textContent = transcript;
+  if(e.results[0].isFinal) {
+    p = document.createElement('p');
+    words.appendChild(p);
+  }
+  console.log(transcript)
+})
+
+//this set of code blocks will result in the transcript being collected and printed to the console after a page load. The function recognition.start() is what begins the linstener that prepares the code to recive data from the mic. In order to continue recording after a break in speech we need to log the end of the event and retrigger the recognition.start() function. The code to do so is as follows.
+
+recognition.addEventListener('end', recognition.start)
+
+recognition.start();
 
 </script>
 
